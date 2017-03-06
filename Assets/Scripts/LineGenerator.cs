@@ -9,16 +9,10 @@ public class LineGenerator : MonoBehaviour
         public int birthYear = 0;
         public int deathYear = 0;
         public int livePeriod = 0;
+        public float liveLineHeight = 0f;
 
         public Person()
         {
-        }
-
-        public Person(int birthY, int deathY)
-        {
-            birthYear = birthY;
-            deathYear = deathY;
-            livePeriod = deathYear - birthYear;
         }
     }
 
@@ -59,7 +53,7 @@ public class LineGenerator : MonoBehaviour
 
         _bottomLeftPos = rect.offsetMin;
         _peopleAmount = (int)rect.rect.width;
-        _maxLineHeight = (int)rect.rect.height;
+        _maxLineHeight = (int)rect.rect.height;     // Image's heightin px which corresponds to _maxLivePeriod in years
         _maxLivePeriod = PERIOD_END - PERIOD_START;
 
         Debug.Log("_maxLineHeight= "+ _maxLineHeight+ "px, coressponds to _maxLivePeriod="+ _maxLivePeriod+" years");
@@ -80,7 +74,8 @@ public class LineGenerator : MonoBehaviour
             person.birthYear = (int)Random.Range((float)PERIOD_START, (float)(PERIOD_END));   // 1900 and 2000 - possible birth year
             person.deathYear = (int)Random.Range((float)person.birthYear, (float)PERIOD_END); // birthYear and 2000 - possible death year, so person can be born and die at the same year
             person.livePeriod = person.deathYear - person.birthYear;
-            Debug.Log("Person" + i + " birthYear= " + person.birthYear + ", deathYear= " + person.deathYear + ", livePeriod= " + person.livePeriod);
+            person.liveLineHeight = person.livePeriod * _maxLineHeight / _maxLivePeriod;    //using proportion between pixels in the Image rectangular area and live period in years
+            Debug.Log("Person" + i + " birthYear= " + person.birthYear + ", deathYear= " + person.deathYear + ", livePeriod= " + person.livePeriod + " years, corresponds to liveLineHeight= "+ person.liveLineHeight + "px");
 
             _peopleQueue.Enqueue(person);
         }
@@ -97,11 +92,10 @@ public class LineGenerator : MonoBehaviour
         {
             // Position of GUI layer is top left corner of the screen
             float posX = counter + _bottomLeftPos.x; // starting X position for drawing the line (which is a rectangle with width=1px)
-            float liveLineHeight = person.livePeriod * _maxLineHeight / _maxLivePeriod;   //using proportion between pixels in the Image rectangular area and live period in years
             float calculatedPosYFromBirth = _bottomLeftPos.y * person.birthYear / PERIOD_START; // using proportion between Image's bottom left Y position and year value
-            float posY = Screen.height - calculatedPosYFromBirth - liveLineHeight;  //starting Y position for drawing the line (which is a rectangle with width=1px)
+            float posY = Screen.height - calculatedPosYFromBirth - person.liveLineHeight;  //starting Y position for drawing the line (which is a rectangle with width=1px)
             GUI.color = graphColor;
-            GUI.DrawTexture(new Rect(new Vector2(posX, posY), new Vector2(1, liveLineHeight)), _texture);
+            GUI.DrawTexture(new Rect(new Vector2(posX, posY), new Vector2(1, person.liveLineHeight)), _texture);
             counter++;
         }
 
