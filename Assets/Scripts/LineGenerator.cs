@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class LineGenerator : MonoBehaviour
 {
+    [SerializeField]
+    Texture2D _texture;
 
-	// Use this for initialization
-	void Start ()
+    // Use this for initialization
+    void Start ()
     {
 		
 	}
