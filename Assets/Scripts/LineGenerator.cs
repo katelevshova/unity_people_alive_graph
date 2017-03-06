@@ -22,6 +22,7 @@ public class LineGenerator : MonoBehaviour
         }
     }
 
+    public Color graphColor = Color.yellow;
     [SerializeField]
     Texture2D _texture;
 
@@ -61,14 +62,9 @@ public class LineGenerator : MonoBehaviour
         _maxLineHeight = (int)rect.rect.height;
         _maxLivePeriod = PERIOD_END - PERIOD_START;
 
+        Debug.Log("_maxLineHeight= "+ _maxLineHeight+ "px, coressponds to _maxLivePeriod="+ _maxLivePeriod+" years");
+
         InitPeopleQueue();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-
     }
 
     /**
@@ -89,4 +85,26 @@ public class LineGenerator : MonoBehaviour
             _peopleQueue.Enqueue(person);
         }
     }
+
+    /**
+     * Draws texture with a size 2x2 px in a rectangle with a size 1xliveLineHeight px 
+     */
+    public void OnGUI()
+    {
+        //TODO: needs to be fixed starting posY
+        float counter = 0;
+        foreach (Person person in _peopleQueue)
+        {
+            // Position of GUI layer is top left corner of the screen
+            float posX = counter + _bottomLeftPos.x; // starting X position for drawing the line (which is a rectangle with width=1px)
+            float liveLineHeight = person.livePeriod * _maxLineHeight / _maxLivePeriod;   //using proportion between pixels in the Image rectangular area and live period in years
+            float calculatedPosYFromBirth = _bottomLeftPos.y * person.birthYear / PERIOD_START; // using proportion between Image's bottom left Y position and year value
+            float posY = Screen.height - calculatedPosYFromBirth - liveLineHeight;  //starting Y position for drawing the line (which is a rectangle with width=1px)
+            GUI.color = graphColor;
+            GUI.DrawTexture(new Rect(new Vector2(posX, posY), new Vector2(1, liveLineHeight)), _texture);
+            counter++;
+        }
+
+        //DrawLinesIndicator();
+    }   
 }
