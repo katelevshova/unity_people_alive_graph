@@ -64,6 +64,14 @@ public class LineGenerator : MonoBehaviour
 
         Debug.Log("_maxLineHeight= "+ _maxLineHeight+ "px, coressponds to _maxLiveYears=" + _maxLiveYears+" years");
 
+        Restart();
+    }
+
+    /**
+     * During first load of the Scene and during OnClick of RestartBtn
+     */ 
+    public void Restart()
+    {
         InitPeopleList();
         CalculateMaxAliveYear();
     }
@@ -94,8 +102,9 @@ public class LineGenerator : MonoBehaviour
     private void CalculateMaxAliveYear()
     {
         // int[] aliveInEachYear = new int[_maxLiveYears];  //for debug info
-     
-        for(int year = PERIOD_START_YEAR; year < PERIOD_END_YEAR; year++)
+        _maxPeopleAlive = 0;
+
+        for (int year = PERIOD_START_YEAR; year < PERIOD_END_YEAR; year++)
         {
             int aliveCounter = 0;
 
@@ -132,7 +141,7 @@ public class LineGenerator : MonoBehaviour
     /**
      * Draws the graph of vertical lines and horizontal line indicator for the year of max people alive
      */ 
-    public void OnGUI()
+    private void OnGUI()
     {
         DrawPeopleLiveGraph();
         DrawIndicators();
