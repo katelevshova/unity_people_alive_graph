@@ -38,3 +38,11 @@ To change positions you can use Pos X and Pos Y properties of Rect Transform com
 
 The same you can simply do with your mouse on the Scene in Editor. 
 Do not change any other properties of Rect Transform.
+
+BACKGROUND COLOR AND TRANSPARENCY
+
+To change the background color and transparency of the Graph use Color property of Image component of the LineGeneratorImage object in the Inspector window. You can do this in both Editor and Game modes.
+
+GRAPH COLOR
+
+To change Graph main color go to Line Generator component of LineGeneratorImage object in Inspector window. Change Graph Color property. You can do this in both Edit and Game modes. Remember if you want to save this color permanently you need to do this in Edit mode and click Apply button in the top of Inspector window to save the setting in prefab.
