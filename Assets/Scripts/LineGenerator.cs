@@ -92,35 +92,39 @@ public class LineGenerator : MonoBehaviour
      */ 
     private void CalculateMaxAliveYear()
     {
-        int[] aliveInEachYear = new int[_maxLiveYears]; 
+        // int[] aliveInEachYear = new int[_maxLiveYears];  //for debug info
 
-        int aliveCounter = 0;
         int aliveMax = 0;
 
-        for(int year = 0; year < _maxLiveYears; year++)
+        for(int year = PERIOD_START_YEAR; year < PERIOD_END_YEAR; year++)
         {
-            aliveCounter = 0;
+            int aliveCounter = 0;
 
             foreach (Person person in _peopleQueue)
             {
-                if(IsAlive(person, PERIOD_START_YEAR+year))
+                if(IsAlive(person, year))
                 {
                     aliveCounter++;
                 }
             }
 
-            aliveInEachYear[year] = aliveCounter;
+            // aliveInEachYear[year] = aliveCounter; //for debug info
 
             if(aliveCounter > aliveMax)
             {
                 aliveMax = aliveCounter;
-                _yearWithMaxPeopleAlive = PERIOD_START_YEAR + year;
+                _yearWithMaxPeopleAlive = year;
             }
         }
 
         Debug.Log("_yearWithMaxPeopleAlive= " + _yearWithMaxPeopleAlive);
     }
 
+    /**
+     * Checks if the person leaved in particular year
+     * @param person
+     * @param year
+     */ 
     private bool IsAlive(Person person, int year)
     {
         return person.birthYear <= year && person.deathYear >= year;
