@@ -43,6 +43,10 @@ BACKGROUND COLOR AND TRANSPARENCY
 
 To change the background color and transparency of the Graph use Color property of Image component of the LineGeneratorImage object in the Inspector window. You can do this in both Editor and Game modes.
 
-GRAPH COLOR
+GRAPH COLOR AND PEOPLE AMOUNT INDICATORS
 
-To change Graph main color go to Line Generator component of LineGeneratorImage object in Inspector window. Change Graph Color property. You can do this in both Edit and Game modes. Remember if you want to save this color permanently you need to do this in Edit mode and click Apply button in the top of Inspector window to save the setting in prefab.
+To change Graph main color with information about people amount go to Line Generator component of LineGeneratorImage object in Inspector window. Change Graph Color property. You can do this in both Edit and Game modes. Remember if you want to save this color permanently you need to do this in Edit mode and click Apply button in the top of Inspector window to save the setting in prefab.
+
+YEARS INFO INDICATORS
+
+Years info indicators represent information about period and the horizontal line for the year with a maximum people alive. To change the color go to Line Generator component of LineGeneratorImage abd set Indicator Color poperty. You can do this in both Edit and Game modes. Remember if you want to save this color permanently you need to do this in Edit mode and click Apply button in the top of Inspector window to save the setting in prefab.
