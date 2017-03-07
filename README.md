@@ -22,6 +22,8 @@ People Alive Graph is an accurate graph which visualizes a solution of the parti
 
 Demo video on YouTube - [PeopleAliveGraph  - Unity3D, C# realization](https://youtu.be/mWc8a6zNogE)
 
+Downloadable version - [Build for PC](https://bitbucket.org/hally/peoplealivegraph/downloads/)
+
 ![PeopleAliveGraph - Screenshot1.png](https://bitbucket.org/repo/k8prBr/images/1876308873-PeopleAliveGraph%20-%20Screenshot1.png)
 
 # HOW TO USE #
