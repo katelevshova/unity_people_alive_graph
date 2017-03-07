@@ -21,3 +21,20 @@ People Alive Graph is an accurate graph which visualizes a solution of the parti
 # DEMO #
 
 Demo video on YouTube - [PeopleAliveGraph  - Unity3D, C# realization](https://youtu.be/mWc8a6zNogE)
+
+# HOW TO USE #
+1. Import GraphDisplayCanvas prefab, LineTexture and LineGenerator script.
+1. Drag GraphDisplayCanvas  from the Projec window on to the Hierarchy window.
+1. Unfold GraphDisplayCanvas object to see its structure.
+1. Hit Play.
+1. Evaluate results.
+1. Click Restart button to create a new list of people with new data.
+
+SCALING AND POSITIONING IN EDITOR MODE 
+
+You can change size of the Graph on the Scene using Width and Height properties of Rect Transform component of LineGeneratorImage object in Editor mode. 
+
+To change positions you can use Pos X and Pos Y properties of Rect Transform component.
+
+The same you can simply do with your mouse on the Scene in Editor. 
+Do not change any other properties of Rect Transform.
