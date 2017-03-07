@@ -28,7 +28,7 @@ public class LineGenerator : MonoBehaviour
     private int _peopleAmount = 100; // equals the width of LineGenerator image in Editor
     private int _maxLineHeight = 0; // the max height of line visible on the graph in pixels
     private int _maxLiveYears = 0;  // the max live period in years
-    private Queue<Person> _peopleQueue;
+    private List<Person> _peopleList;
     private Vector2 _bottomLeftPos = new Vector2(0f, 0f); // the bottom left position of Image
 
     private int _yearWithMaxPeopleAlive = 0;
@@ -63,16 +63,16 @@ public class LineGenerator : MonoBehaviour
 
         Debug.Log("_maxLineHeight= "+ _maxLineHeight+ "px, coressponds to _maxLiveYears=" + _maxLiveYears+" years");
 
-        InitPeopleQueue();
+        InitPeopleList();
         CalculateMaxAliveYear();
     }
 
     /**
-     * Creates a queue of zeroes with a size of LineRenderer image width
+     * Creates a list of people with a size which equals the width of Image 
      */
-    private void InitPeopleQueue()
+    private void InitPeopleList()
     {
-        _peopleQueue = new Queue<Person>();
+        _peopleList = new List<Person>();
 
         for (int i = 0; i < _peopleAmount; i++)
         {
@@ -83,7 +83,7 @@ public class LineGenerator : MonoBehaviour
             person.liveLineHeight = person.liveYears * _maxLineHeight / _maxLiveYears;    //using proportion between pixels in the Image rectangular area and live period in years
             Debug.Log("Person" + i + " birthYear= " + person.birthYear + ", deathYear= " + person.deathYear + ", liveYears= " + person.liveYears + " years, corresponds to liveLineHeight= "+ person.liveLineHeight + "px");
 
-            _peopleQueue.Enqueue(person);
+            _peopleList.Add(person);
         }
     }
     
@@ -100,7 +100,7 @@ public class LineGenerator : MonoBehaviour
         {
             int aliveCounter = 0;
 
-            foreach (Person person in _peopleQueue)
+            foreach (Person person in _peopleList)
             {
                 if(IsAlive(person, year))
                 {
@@ -147,7 +147,7 @@ public class LineGenerator : MonoBehaviour
     private void DrawPeopleLiveGraph()
     {
         float counter = 0;
-        foreach (Person person in _peopleQueue)
+        foreach (Person person in _peopleList)
         {
             //NOTE: Position of GUI layer is top left corner of the screen so the direction of line drawing will go from top to bottom
 
