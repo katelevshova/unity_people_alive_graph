@@ -22,6 +22,8 @@ People Alive Graph is an accurate graph which visualizes a solution of the parti
 
 Demo video on YouTube - [PeopleAliveGraph  - Unity3D, C# realization](https://youtu.be/mWc8a6zNogE)
 
+![PeopleAliveGraph - Screenshot1.png](https://bitbucket.org/repo/k8prBr/images/1876308873-PeopleAliveGraph%20-%20Screenshot1.png)
+
 # HOW TO USE #
 1. Import **GraphDisplayCanvas** prefab, **LineTexture** and **LineGenerator** script.
 1. Drag **GraphDisplayCanvas**  from the Project window on to the Hierarchy window.
