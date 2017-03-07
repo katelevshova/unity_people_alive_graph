@@ -32,10 +32,11 @@ public class LineGenerator : MonoBehaviour
     private Vector2 _bottomLeftPos = new Vector2(0f, 0f); // the bottom left position of Image
 
     private int _yearWithMaxPeopleAlive = 0;
+    private int _maxPeopleAlive = 0;
 
     /**
      * Initialization
-     */ 
+     */
     void Start()
     {
         RectTransform rect = GetComponent<RectTransform>();
@@ -93,9 +94,7 @@ public class LineGenerator : MonoBehaviour
     private void CalculateMaxAliveYear()
     {
         // int[] aliveInEachYear = new int[_maxLiveYears];  //for debug info
-
-        int aliveMax = 0;
-
+     
         for(int year = PERIOD_START_YEAR; year < PERIOD_END_YEAR; year++)
         {
             int aliveCounter = 0;
@@ -110,14 +109,14 @@ public class LineGenerator : MonoBehaviour
 
             // aliveInEachYear[year] = aliveCounter; //for debug info
 
-            if(aliveCounter > aliveMax)
+            if(aliveCounter > _maxPeopleAlive)
             {
-                aliveMax = aliveCounter;
+                _maxPeopleAlive = aliveCounter;
                 _yearWithMaxPeopleAlive = year;
             }
         }
 
-        Debug.Log("_yearWithMaxPeopleAlive= " + _yearWithMaxPeopleAlive);
+        Debug.Log("_yearWithMaxPeopleAlive= " + _yearWithMaxPeopleAlive+ ", _maxPeopleAlive= " + _maxPeopleAlive);
     }
 
     /**
@@ -136,7 +135,7 @@ public class LineGenerator : MonoBehaviour
     public void OnGUI()
     {
         DrawPeopleLiveGraph();
-        DrawMaxYearLineIndicator();
+        DrawIndicators();
     }
 
     /**
@@ -170,17 +169,36 @@ public class LineGenerator : MonoBehaviour
 
     /**
      * Draws a horizontal line indicator with width = rectangle width, height=1px
+     * and Text field with info about the graph
      * Line must be drawn above the graph rectangular area.
     */
-    private void DrawMaxYearLineIndicator()
+    private void DrawIndicators()
     {
         GUI.color = indicatorColor;
 
+        //Draw horizontal line indicator for year with max people alive
         float yearsFromStartPointMaxYear = _yearWithMaxPeopleAlive - PERIOD_START_YEAR;
         float heightFromStartToMaxYear = yearsFromStartPointMaxYear * _maxLineHeight / _maxLiveYears;
-        //Debug.Log("heightFromStartToMaxYear= "+ heightFromStartToMaxYear + "px corresponds to year "+_yearWithMaxPeopleAlive);
-
         float upperPosY = Screen.height - _bottomLeftPos.y - heightFromStartToMaxYear;
         GUI.DrawTexture(new Rect(new Vector2(_bottomLeftPos.x, upperPosY), new Vector2((float)_peopleAmount, 1)), _texture);
+
+        //Draw Years text fields
+        float fieldWidth = 180f;
+        float fieldHeight = 20f;
+        GUI.TextField(new Rect(new Vector2(_bottomLeftPos.x- fieldWidth, upperPosY - fieldHeight/2), 
+            new Vector2(fieldWidth, fieldHeight)), "Max people alive in "+_yearWithMaxPeopleAlive);
+        GUI.TextField(new Rect(new Vector2(_bottomLeftPos.x - fieldWidth, Screen.height - _bottomLeftPos.y - fieldHeight/2), 
+            new Vector2(fieldWidth, fieldHeight)), "Period starts in " + PERIOD_START_YEAR);
+        GUI.TextField(new Rect(new Vector2(_bottomLeftPos.x - fieldWidth, Screen.height - _bottomLeftPos.y - _maxLineHeight - fieldHeight/2), 
+            new Vector2(fieldWidth, fieldHeight)), "Period ends in " + PERIOD_START_YEAR);
+
+        //Draw people amount indicator
+        GUI.color = graphColor;
+
+        GUI.TextField(new Rect(new Vector2(_bottomLeftPos.x + _peopleAmount, Screen.height - _bottomLeftPos.y - fieldHeight / 2),
+            new Vector2(fieldWidth, fieldHeight)), "People total amount " + _peopleAmount);
+        GUI.TextField(new Rect(new Vector2(_bottomLeftPos.x + _peopleAmount, upperPosY - fieldHeight / 2),
+          new Vector2(fieldWidth, fieldHeight)), "Max people alive " + _maxPeopleAlive);
+
     }
 }
