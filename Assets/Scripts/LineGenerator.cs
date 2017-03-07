@@ -17,6 +17,7 @@ public class LineGenerator : MonoBehaviour
     }
 
     public Color graphColor = Color.yellow;
+    public Color indicatorColor = Color.green;
     [SerializeField]
     private Texture2D _texture;
 
@@ -124,12 +125,22 @@ public class LineGenerator : MonoBehaviour
     {
         return person.birthYear <= year && person.deathYear >= year;
     }
-
+    
+    /**
+     * Draws the graph of vertical lines and horizontal line indicator for the year of max people alive
+     */ 
+    public void OnGUI()
+    {
+        DrawPeopleLiveGraph();
+        DrawMaxYearLineIndicator();
+    }
 
     /**
-     * Draws texture with a size 2x2 px in a Rectangle with a size 1xliveLineHeight px 
-     */
-    public void OnGUI()
+    * Draws the graph of vertical lines inside of the Image rectangular area 
+    * by drawing texture with a size 2x2 px as a Rectangle with a size 1xliveLineHeight px
+    * for each person
+    */
+    private void DrawPeopleLiveGraph()
     {
         float counter = 0;
         foreach (Person person in _peopleQueue)
@@ -140,19 +151,32 @@ public class LineGenerator : MonoBehaviour
             float upperPosX = counter + _bottomLeftPos.x;
 
             // convert Years from PERIOD_START_YEAR to Death year in to pixels
-            float yearsFromStartPointToDeath = person.deathYear - PERIOD_START_YEAR; 
+            float yearsFromStartPointToDeath = person.deathYear - PERIOD_START_YEAR;
             float heightFromStartPointToDeath = yearsFromStartPointToDeath * _maxLineHeight / _maxLiveYears; // pixels which are corresponded to yearsFromStartPointToDeath
 
             // upper Y position of the line (which is a rectangle with width=1px)
-            float upperPosY = Screen.height - _bottomLeftPos.y - heightFromStartPointToDeath;  
+            float upperPosY = Screen.height - _bottomLeftPos.y - heightFromStartPointToDeath;
             GUI.color = graphColor;
 
             //Draw a rectangle from Death year position to Birth year position
             GUI.DrawTexture(new Rect(new Vector2(upperPosX, upperPosY), new Vector2(1, person.liveLineHeight)), _texture);
             counter++;
         }
+    }
 
-        //DrawLinesIndicator();
-    }  
-    
+    /**
+     * Draws a horizontal line indicator with width = rectangle width, height=1px
+     * Line must be drawn above the graph rectangular area.
+    */
+    private void DrawMaxYearLineIndicator()
+    {
+        GUI.color = indicatorColor;
+
+        float yearsFromStartPointMaxYear = _yearWithMaxPeopleAlive - PERIOD_START_YEAR;
+        float heightFromStartToMaxYear = yearsFromStartPointMaxYear * _maxLineHeight / _maxLiveYears;
+        //Debug.Log("heightFromStartToMaxYear= "+ heightFromStartToMaxYear + "px corresponds to year "+_yearWithMaxPeopleAlive);
+
+        float upperPosY = Screen.height - _bottomLeftPos.y - heightFromStartToMaxYear;
+        GUI.DrawTexture(new Rect(new Vector2(_bottomLeftPos.x, upperPosY), new Vector2((float)_peopleAmount, 1)), _texture);
+    }
 }
