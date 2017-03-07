@@ -30,6 +30,9 @@ public class LineGenerator : MonoBehaviour
     private Queue<Person> _peopleQueue;
     private Vector2 _bottomLeftPos = new Vector2(0f, 0f);
 
+    private int _maxYear = PERIOD_END;
+    private int _minYear = PERIOD_START;
+
     // Use this for initialization
     void Start()
     {
@@ -59,6 +62,7 @@ public class LineGenerator : MonoBehaviour
         Debug.Log("_maxLineHeight= "+ _maxLineHeight+ "px, coressponds to _maxLivePeriod="+ _maxLivePeriod+" years");
 
         InitPeopleQueue();
+        CalculateAlivePeriod();
     }
 
     /**
@@ -81,6 +85,18 @@ public class LineGenerator : MonoBehaviour
         }
     }
 
+    private void CalculateAlivePeriod()
+    {
+      /*  int 
+        foreach (Person person in _peopleQueue)
+        {
+            if(person.birthYear >= _minYear)
+            {
+                
+            }
+        }*/
+    }
+
     /**
      * Draws texture with a size 2x2 px in a rectangle with a size 1xliveLineHeight px 
      */
@@ -92,8 +108,11 @@ public class LineGenerator : MonoBehaviour
         {
             // Position of GUI layer is top left corner of the screen
             float posX = counter + _bottomLeftPos.x; // starting X position for drawing the line (which is a rectangle with width=1px)
-            float calculatedPosYFromBirth = _bottomLeftPos.y * person.birthYear / PERIOD_START; // using proportion between Image's bottom left Y position and year value
-            float posY = Screen.height - calculatedPosYFromBirth - person.liveLineHeight;  //starting Y position for drawing the line (which is a rectangle with width=1px)
+            //
+            float yearsFromStartPointToDeath = person.deathYear - PERIOD_START; 
+            float heightFromStartPointToDeath = yearsFromStartPointToDeath * _maxLineHeight / _maxLivePeriod;
+
+            float posY = Screen.height - _bottomLeftPos.y - heightFromStartPointToDeath;  
             GUI.color = graphColor;
             GUI.DrawTexture(new Rect(new Vector2(posX, posY), new Vector2(1, person.liveLineHeight)), _texture);
             counter++;
