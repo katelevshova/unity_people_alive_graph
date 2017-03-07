@@ -30,10 +30,11 @@ public class LineGenerator : MonoBehaviour
     private Queue<Person> _peopleQueue;
     private Vector2 _bottomLeftPos = new Vector2(0f, 0f); // the bottom left position of Image
 
-    private int _maxYear = PERIOD_END_YEAR;
-    private int _minYear = PERIOD_START_YEAR;
+    private int _yearWithMaxPeopleAlive = 0;
 
-    // Use this for initialization
+    /**
+     * Initialization
+     */ 
     void Start()
     {
         RectTransform rect = GetComponent<RectTransform>();
@@ -84,11 +85,46 @@ public class LineGenerator : MonoBehaviour
             _peopleQueue.Enqueue(person);
         }
     }
-
+    
+    /**
+     * Calculates year with the maximum amount of people alive
+     */ 
     private void CalculateMaxAliveYear()
     {
-    
+        int[] aliveInEachYear = new int[_maxLiveYears]; 
+
+        int aliveCounter = 0;
+        int aliveMax = 0;
+
+        for(int year = 0; year < _maxLiveYears; year++)
+        {
+            aliveCounter = 0;
+
+            foreach (Person person in _peopleQueue)
+            {
+                if(IsAlive(person, PERIOD_START_YEAR+year))
+                {
+                    aliveCounter++;
+                }
+            }
+
+            aliveInEachYear[year] = aliveCounter;
+
+            if(aliveCounter > aliveMax)
+            {
+                aliveMax = aliveCounter;
+                _yearWithMaxPeopleAlive = PERIOD_START_YEAR + year;
+            }
+        }
+
+        Debug.Log("_yearWithMaxPeopleAlive= " + _yearWithMaxPeopleAlive);
     }
+
+    private bool IsAlive(Person person, int year)
+    {
+        return person.birthYear <= year && person.deathYear >= year;
+    }
+
 
     /**
      * Draws texture with a size 2x2 px in a Rectangle with a size 1xliveLineHeight px 
@@ -117,5 +153,6 @@ public class LineGenerator : MonoBehaviour
         }
 
         //DrawLinesIndicator();
-    }   
+    }  
+    
 }
