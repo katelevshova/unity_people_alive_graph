@@ -52,3 +52,5 @@ To change Graph main color with information about people amount go to **Line Gen
 YEARS INFO INDICATORS
 
 Years info indicators represent information about period and the horizontal line for the year with a maximum people alive. To change the color go to **Line Generator** component of **LineGeneratorImage** add set **Indicator Color** property. You can do this in both Edit and Game modes. Remember if you want to save this color permanently you need to do this in Edit mode and click **Apply** button in the top of Inspector window to save the setting in prefab.
+
+![PeopleAliveGraph - Screenshot2 - colored.png](https://bitbucket.org/repo/k8prBr/images/1652336984-PeopleAliveGraph%20-%20Screenshot2%20-%20colored.png)
