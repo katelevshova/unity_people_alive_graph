@@ -14,8 +14,10 @@ People Alive Graph is an accurate graph which visualizes a solution of the parti
 
 # FEATURES #
 
-Multiplatform
+* Multiplatform
+* Configuration possibilities: changing position, size and color of the graph’s elements
+* Easy to use
 
-Configuration possibilities: changing position, size and color of the graph’s elements
+# DEMO #
 
-Easy to use
+Demo video on YouTube - [PeopleAliveGraph  - Unity3D, C# realization](https://youtu.be/mWc8a6zNogE)
