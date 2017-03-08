@@ -199,7 +199,7 @@ public class LineGenerator : MonoBehaviour
         GUI.TextField(new Rect(new Vector2(_bottomLeftPos.x - fieldWidth, Screen.height - _bottomLeftPos.y - fieldHeight/2), 
             new Vector2(fieldWidth, fieldHeight)), "Period starts in " + PERIOD_START_YEAR);
         GUI.TextField(new Rect(new Vector2(_bottomLeftPos.x - fieldWidth, Screen.height - _bottomLeftPos.y - _maxLineHeight - fieldHeight/2), 
-            new Vector2(fieldWidth, fieldHeight)), "Period ends in " + PERIOD_START_YEAR);
+            new Vector2(fieldWidth, fieldHeight)), "Period ends in " + PERIOD_END_YEAR);
 
         //Draw people amount indicator
         GUI.color = graphColor;
