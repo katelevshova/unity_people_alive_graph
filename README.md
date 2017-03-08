@@ -20,7 +20,7 @@ People Alive Graph is an accurate graph which visualizes a solution of the parti
 
 # DEMO #
 
-Demo video on YouTube - [PeopleAliveGraph  - Unity3D, C# realization](https://youtu.be/mWc8a6zNogE)
+Demo video on YouTube - [PeopleAliveGraph  - Unity3D, C# realization](https://youtu.be/1PZQz41R98E)
 
 Downloadable version - [Build for PC](https://bitbucket.org/hally/peoplealivegraph/downloads/)
 
