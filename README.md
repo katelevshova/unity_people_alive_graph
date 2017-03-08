@@ -24,7 +24,7 @@ Demo video on YouTube - [PeopleAliveGraph  - Unity3D, C# realization](https://yo
 
 Downloadable version - [Build for PC](https://bitbucket.org/hally/peoplealivegraph/downloads/)
 
-![PeopleAliveGraph - Screenshot1.png](https://bitbucket.org/repo/k8prBr/images/1876308873-PeopleAliveGraph%20-%20Screenshot1.png)
+![PeopleAliveGraph - Screenshot1.png](https://bitbucket.org/repo/k8prBr/images/1739339154-PeopleAliveGraph%20-%20Screenshot1.png)
 
 # HOW TO USE #
 1. Import **GraphDisplayCanvas** prefab, **LineTexture** and **LineGenerator** script.
@@ -55,4 +55,4 @@ YEARS INFO INDICATORS
 
 Years info indicators represent information about period and the horizontal line for the year with a maximum people alive. To change the color go to **Line Generator** component of **LineGeneratorImage** add set **Indicator Color** property. You can do this in both Edit and Game modes. Remember if you want to save this color permanently you need to do this in Edit mode and click **Apply** button in the top of Inspector window to save the setting in prefab.
 
-![PeopleAliveGraph - Screenshot2 - colored.png](https://bitbucket.org/repo/k8prBr/images/1652336984-PeopleAliveGraph%20-%20Screenshot2%20-%20colored.png)
+![PeopleAliveGraph - Screenshot2 - colored.png](https://bitbucket.org/repo/k8prBr/images/3917326527-PeopleAliveGraph%20-%20Screenshot2%20-%20colored.png)
