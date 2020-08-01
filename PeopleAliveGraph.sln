@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2015
+# Visual Studio 2017
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PeopleAliveGraph", "PeopleAliveGraph.csproj", "{4E32C65B-6942-153D-87F2-CC97DDC0C496}"
 EndProject
 Global
